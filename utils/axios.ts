@@ -1,6 +1,8 @@
 import axios from "axios";
 
 export const getData = async (fields: any) =>
-  axios.get("api/routes/predict-using-data", { params: fields });
+  axios.get("https://heartdiseaseprediction.pythonanywhere.com/getreport", {
+    params: fields,
+  });
 // export const getData = async (fields: any) =>
 //   axios.post("api/routes/predict-using-data", fields);

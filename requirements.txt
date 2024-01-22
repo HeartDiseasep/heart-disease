@@ -1,4 +1,0 @@
-uvicorn[standard]==0.23.2
-scikit-learn
-pandas
-fastapi==0.100.1
