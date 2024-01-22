@@ -52,8 +52,6 @@ export const POST = async (request: Request) => {
 };
 export const GET = async (request: NextRequest) => {
   const searchParams = request.nextUrl.searchParams;
-  const query = searchParams.get("query");
-
   const body = {
     blood_pressure: searchParams.get("blood_pressure"),
     cholesterol: searchParams.get("cholesterol"),
@@ -61,8 +59,13 @@ export const GET = async (request: NextRequest) => {
     max_heart_rate: searchParams.get("max_heart_rate"),
     resting_ecg: searchParams.get("resting_ecg"),
   };
-  const process: any = await runScript(body);
-  return NextResponse.json(JSON.parse(process), { status: 200 });
-  // return Response.json({});
+  try {
+    const process: any = await runScript(body);
+    return NextResponse.json(JSON.parse(process), { status: 200 });
+  } catch (error) {
+    console.log(error);
+
+    return Response.json({});
+  }
   // return Response.json({ helloe: "world" });
 };
