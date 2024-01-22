@@ -1,10 +1,6 @@
 import { spawn } from "child_process";
-/**
- * Run python script, pass in `-u` to not buffer console output
- * @return {ChildProcess}
- */
 
-export async function runScript({
+async function runScript({
   blood_pressure,
   cholesterol,
   fasting_sugar,
@@ -34,7 +30,7 @@ export async function runScript({
   ]);
   let data = "";
 
-  process.stdout.on("data", (indata) => {
+  process.stdout.on("data", (indata: any) => {
     data = `${indata}`;
   });
   return new Promise((resolve) => {
