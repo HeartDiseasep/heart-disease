@@ -18,7 +18,7 @@ async function runScript({
   const process: any = spawn("python", [
     "-u",
 
-    "./scripts/Heart disease Prediction.py",
+    "Heart disease Prediction.py",
     "--cholesterol",
     cholesterol,
     "--fasting_sugar",

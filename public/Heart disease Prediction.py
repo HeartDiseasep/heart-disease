@@ -8,7 +8,7 @@ import json
 
 
 # Load the dataset (assuming it's in a CSV file named 'heart_data.csv')
-io=os.path.abspath('scripts\\heart_data.csv')
+io=os.path.abspath('/heart_data.csv')
 data = pd.read_csv(io)
 # data = pd.read_csv('./heart_data.csv')
 # Separate features and target variable
