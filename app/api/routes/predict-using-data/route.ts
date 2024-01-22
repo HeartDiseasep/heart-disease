@@ -67,5 +67,4 @@ export const GET = async (request: NextRequest) => {
 
     return Response.json({});
   }
-  // return Response.json({ helloe: "world" });
 };
