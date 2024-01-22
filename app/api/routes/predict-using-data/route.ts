@@ -45,3 +45,10 @@ export const POST = async (request: Request) => {
   return Response.json(JSON.parse(process));
   // return Response.json({});
 };
+export const GET = async (request: Request) => {
+  // const body = await request.json();
+  // const process: any = await runScript(body);
+
+  return Response.json({ helloe: "world" });
+  // return Response.json({});
+};
