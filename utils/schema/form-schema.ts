@@ -21,6 +21,8 @@ export const FormSchema = z.object({
     .number({ required_error: "Cholestrol is required." })
     .min(0)
     .max(1),
+});
+export const LoginFormSchema = z.object({
   age: z.number({ required_error: "Age is required." }).min(1).max(120),
   gender: z.string({ required_error: "Gender is required." }),
   user_name: z.string({ required_error: "User name is required." }),

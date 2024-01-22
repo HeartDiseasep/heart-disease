@@ -1,14 +1,37 @@
-import React from "react";
-import { Controller } from "react-hook-form";
+"use client";
+import React, { useContext, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Switch } from "../ui/switch";
+import { Button } from "../ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginFormSchema } from "@/utils/schema/form-schema";
+import { FormDataContext } from "@/app/page";
 
-type Props = { control: any };
+type Props = {};
 
-const Login = ({ control }: Props) => {
+const Login = ({}: Props) => {
+  const { setLoginInfo } = useContext(FormDataContext);
+  const { control, handleSubmit } = useForm({
+    resolver: zodResolver(LoginFormSchema),
+    defaultValues: {
+      age: 45,
+      user_name: "Username",
+      gender: "male",
+    },
+  });
+  const postdata = async (values: any) => {
+    setLoginInfo(values);
+  };
+
   return (
-    <div className="flex flex-col space-y-4">
+    <form
+      onSubmit={handleSubmit(postdata, (d) => {
+        console.log(d);
+      })}
+      className="flex flex-col space-y-4"
+    >
       <div className="flex flex-col space-y-1.5">
         <Label htmlFor="user_name">User name</Label>
         <Controller
@@ -59,7 +82,7 @@ const Login = ({ control }: Props) => {
             render={({ field }) => (
               <Switch
                 {...field}
-                checked={field.value}
+                checked={!!(field.value === "male")}
                 onCheckedChange={(change) => {
                   field.onChange({
                     target: { value: change ? "male" : "female" },
@@ -71,7 +94,8 @@ const Login = ({ control }: Props) => {
           <span>Male</span>
         </div>
       </div>
-    </div>
+      <Button>Login</Button>
+    </form>
   );
 };
 

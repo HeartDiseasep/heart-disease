@@ -1,14 +1,52 @@
-import React from "react";
+"use client";
+import React, { useContext, useState } from "react";
 import { Input } from "../ui/input";
-import { Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Label } from "../ui/label";
 import { Switch } from "../ui/switch";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormSchema } from "@/utils/schema/form-schema";
+import { FormDataContext } from "@/app/page";
+import { Button } from "../ui/button";
+import { getData } from "@/utils/axios";
+import { supabase } from "@/utils/supabase";
 
-type Props = { control: any };
+type Props = {};
 
-const PatientInfo = ({ control }: Props) => {
+const PatientInfo = ({}: Props) => {
+  const [isFetching, setIsfetching] = useState(false);
+  const { loginInfo, setResponse, clearData } = useContext(FormDataContext);
+  const { control, handleSubmit } = useForm({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      blood_pressure: 100,
+      cholesterol: 100,
+      fasting_sugar: 0,
+      max_heart_rate: 90,
+      resting_ecg: 1,
+    },
+  });
+  const postdata = async (values: any) => {
+    setIsfetching(true);
+    const { data } = await getData(values);
+    await supabase.from("prediction_log").insert({
+      ...loginInfo,
+      ...values,
+      fasting_sugar: !!values.fasting_sugar,
+      resting_ecg: !!values.resting_ecg,
+      percentage: +(data.data.percentage * 100).toFixed(2),
+    });
+    setResponse(data.data);
+
+    setIsfetching(false);
+  };
+
   return (
-    <div>
+    <form
+      onSubmit={handleSubmit(postdata, (d) => {
+        console.log(d);
+      })}
+    >
       <div className="grid w-full items-center gap-4">
         <div className="flex flex-col space-y-1.5">
           <Label htmlFor="blood_pressure">Blood Pressure</Label>
@@ -115,7 +153,19 @@ const PatientInfo = ({ control }: Props) => {
           <Label htmlFor="resting_ecg">Resting Ecg</Label>
         </div>
       </div>
-    </div>
+      <div>
+        <Button variant={"ghost"} type="button" onClick={clearData}>
+          Cancel
+        </Button>
+        <Button>
+          {isFetching ? (
+            <div className="h-6 w-6 rounded-full border-2 border-r-transparent animate-spin "></div>
+          ) : (
+            "Predict"
+          )}
+        </Button>
+      </div>
+    </form>
   );
 };
 
