@@ -15,7 +15,7 @@ async function runScript({
 }) {
   const process: any = spawn("python", [
     "-u",
-    // path.join(__dirname, "./scripts/Heart disease Prediction.py"),
+
     "./scripts/Heart disease Prediction.py",
     "--cholesterol",
     cholesterol,
@@ -38,9 +38,9 @@ async function runScript({
   });
 }
 
-export async function POST(request: Request) {
+export const POST = async (request: Request) => {
   const body = await request.json();
   const process: any = await runScript(body);
   return Response.json(JSON.parse(process));
   // return Response.json({});
-}
+};
