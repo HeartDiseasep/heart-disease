@@ -36,7 +36,7 @@ const PatientInfo = ({}: Props) => {
       resting_ecg: !!values.resting_ecg,
       percentage: +(data.data.percentage * 100).toFixed(2),
     });
-    setResponse(data.data);
+    setResponse(data);
 
     setIsfetching(false);
   };
