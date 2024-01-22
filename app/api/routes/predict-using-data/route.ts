@@ -1,5 +1,5 @@
 import { spawn } from "child_process";
-
+export const dynamic = "force-dynamic";
 async function runScript({
   blood_pressure,
   cholesterol,
@@ -41,6 +41,7 @@ async function runScript({
 export const POST = async (request: Request) => {
   const body = await request.json();
   const process: any = await runScript(body);
+
   return Response.json(JSON.parse(process));
   // return Response.json({});
 };
