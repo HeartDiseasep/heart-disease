@@ -34,7 +34,7 @@ const PatientInfo = ({}: Props) => {
       ...values,
       fasting_sugar: !!values.fasting_sugar,
       resting_ecg: !!values.resting_ecg,
-      percentage: +(data.data.percentage * 100).toFixed(2),
+      percentage: +(data.percentage * 100).toFixed(2),
     });
     setResponse(data);
 
