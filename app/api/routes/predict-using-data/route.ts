@@ -1,4 +1,6 @@
 import { spawn } from "child_process";
+
+import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 async function runScript({
   blood_pressure,
@@ -39,10 +41,13 @@ async function runScript({
 }
 
 export const POST = async (request: Request) => {
-  const body = await request.json();
-  const process: any = await runScript(body);
-
-  return Response.json(JSON.parse(process));
+  try {
+    const body = await request.json();
+    const process: any = await runScript(body);
+    return NextResponse.json(JSON.parse(process), { status: 200 });
+  } catch (error) {
+    return NextResponse.json(error, { status: 500 });
+  }
   // return Response.json({});
 };
 export const GET = async (request: Request) => {
