@@ -1,4 +1,6 @@
 import axios from "axios";
 
 export const getData = async (fields: any) =>
-  axios.post("api/routes/predict-using-data", fields);
+  axios.get("api/routes/predict-using-data", { params: fields });
+// export const getData = async (fields: any) =>
+//   axios.post("api/routes/predict-using-data", fields);

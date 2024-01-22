@@ -1,6 +1,6 @@
 import { spawn } from "child_process";
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 async function runScript({
   blood_pressure,
@@ -50,10 +50,19 @@ export const POST = async (request: Request) => {
   }
   // return Response.json({});
 };
-export const GET = async (request: Request) => {
-  // const body = await request.json();
-  // const process: any = await runScript(body);
+export const GET = async (request: NextRequest) => {
+  const searchParams = request.nextUrl.searchParams;
+  const query = searchParams.get("query");
 
-  return Response.json({ helloe: "world" });
+  const body = {
+    blood_pressure: searchParams.get("blood_pressure"),
+    cholesterol: searchParams.get("cholesterol"),
+    fasting_sugar: searchParams.get("fasting_sugar"),
+    max_heart_rate: searchParams.get("max_heart_rate"),
+    resting_ecg: searchParams.get("resting_ecg"),
+  };
+  const process: any = await runScript(body);
+  return NextResponse.json(JSON.parse(process), { status: 200 });
   // return Response.json({});
+  // return Response.json({ helloe: "world" });
 };
