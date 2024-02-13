@@ -16,7 +16,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        style={{
+          backgroundImage: "url(https://i.gifer.com/70bm.gif)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+        className={inter.className}
+      >
+        {children}
+      </body>
     </html>
   );
 }
