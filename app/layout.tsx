@@ -18,11 +18,13 @@ export default function RootLayout({
     <html lang="en">
       <body
         style={{
-          backgroundImage: "url(https://i.gifer.com/70bm.gif)",
+          backgroundImage:
+            "url(https://media1.tenor.com/m/NZ0zSz551w4AAAAC/life-heart.gif)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
-        className={inter.className}
+        className={`dark ${inter.className}`}
       >
         {children}
       </body>
