@@ -4,10 +4,10 @@ export const FormSchema = z.object({
   blood_pressure: z
     .number({ required_error: "Blood pressure is required." })
     .min(90)
-    .max(190),
+    .max(140),
   cholesterol: z
     .number({ required_error: "Cholestrol is required." })
-    .min(100)
+    .min(125)
     .max(200),
   fasting_sugar: z
     .number({ required_error: "Cholestrol is required." })
@@ -15,7 +15,7 @@ export const FormSchema = z.object({
     .max(1),
   max_heart_rate: z
     .number({ required_error: "Max heart rate is required." })
-    .min(90)
+    .min(100)
     .max(200),
   resting_ecg: z
     .number({ required_error: "Cholestrol is required." })

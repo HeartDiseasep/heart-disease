@@ -28,7 +28,7 @@ export default function Home() {
     <FormDataContext.Provider
       value={{ loginInfo, setLoginInfo, response, setResponse, clearData }}
     >
-      <div className="flex min-h-screen flex-col items-center justify-center">
+      <div className="flex min-h-screen  items-center gap-4  justify-center">
         {!!response ? (
           <Dialogue
             content={response}
@@ -44,6 +44,16 @@ export default function Home() {
             <CardDescription>Predict the health of patient.</CardDescription>
           </CardHeader>
           <CardContent>{loginInfo ? <PatientInfo /> : <Login />}</CardContent>
+        </Card>
+        <Card className="w-[350px]">
+          <CardHeader>
+            <CardTitle>General Limits</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-4">
+            <div>BP: (Low blood pressure) 90-140 (High blood pressure)</div>
+            <div>Cholestorl: 125-200 Age above 20</div>
+            <div>Heart rate: 100-200 age above 20</div>
+          </CardContent>
         </Card>
       </div>
     </FormDataContext.Provider>
